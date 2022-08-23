@@ -131,6 +131,58 @@
 			"response": []
 		},
 		{
+			"name": "query with no input",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query  {\n   firstQuery\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student-service",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student-service"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query with input",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query  {\n   fullName(sampleRequest : {\n       firstName : \"Gaurav\"\n       lastName : \"Patel\"\n   })\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student-service",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student-service"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Save Student",
 			"request": {
 				"method": "POST",
