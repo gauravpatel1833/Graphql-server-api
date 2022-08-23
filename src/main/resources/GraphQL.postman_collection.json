@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "17e7171a-5253-44b2-95a4-c800dbf83115",
+		"name": "GraphQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Book all or by id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    allBooks{\n        isn\n        title\n        authors\n    }\n    book(id: \"124\"){\n        title\n        authors\n        publisher\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8091/rest/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"rest",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation{\n    createBook(isn: \"127\",title: \"The Docker Guide\",publisher:\"Gaurav\",category:HORROR){\n        isn\n        title\n        publisher\n        category\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8091/rest/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"rest",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Book using variable",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation myOperation($isn:String,$title:String,$publisher:String=\"Paulo\"){\n    createBook(isn: $isn,title: $title,publisher:$publisher,category:HORROR)\n}",
+						"variables": "{\n    \"isn\":\"456\",\n    \"title\":\"Java\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/rest/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"rest",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book by id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    book(id: \"124\"){\n        title\n        authors\n        publisher\n        author{\n            name\n            age\n        }\n        category\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8091/rest/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"rest",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Student by id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query student($id: Int) {\n  student(id: $id) {\n    id\n    firstName\n    lastName\n    email\n    street\n    city\n    learningSubjects(subjectNameFilter: All) {\n      id\n      subjectName\n      marksObtained\n    }\n    fullName\n  }\n}",
+						"variables": "{\n  \"id\": 2\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student-service",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student-service"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation createStudent ($createStudentRequest : CreateStudentRequest) {\n  createStudent (createStudentRequest : $createStudentRequest) {\n    id\n    firstName\n    lastName\n    email\n    street\n    city\n    learningSubjects(subjectNameFilter : All) {\n      id\n      subjectName\n      marksObtained\n    }\n    fullName\n  }\n}",
+						"variables": "{\n    \"createStudentRequest\": {\n        \"firstName\": \"Peter\",\n        \"lastName\": \"John\",\n        \"email\": \"peter@gmail.com\",\n        \"street\": \"Down the street\",\n        \"city\": \"New York\",\n        \"subjectsLearning\": [\n            {\n                \"subjectName\": \"Java\",\n                \"marksObtained\": 55.0\n            },\n            {\n                \"subjectName\": \"PHP\",\n                \"marksObtained\": 50.0\n            }\n        ]\n    }\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student-service",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student-service"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book by id using variable",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query book ($id : String){\n    book(id: $id){\n        title\n        authors\n        publisher\n        author{\n            name\n            age\n        }\n        category\n    }\n}",
+						"variables": "{\n    \"id\" : \"124\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/rest/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"rest",
+						"books"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
